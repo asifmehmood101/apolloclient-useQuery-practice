@@ -17,7 +17,9 @@ const ADD_TODO = gql`
   }
 `;
 function Addtodo() {
-  let input;
+  let input; // the input variable which will hold reference to the input element
+
+  //addTodo mutate function and object with current mutation state
   const [addTodo, { data }] = useMutation(ADD_TODO);
 
   return (
@@ -25,13 +27,14 @@ function Addtodo() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          //call mutate function
           addTodo({ variables: { type: input.value } });
           input.value = '';
         }}
       >
         <input
           ref={(node) => {
-            input = node;
+            input = node; // assign the node reference to the input variable
           }}
         />
         <button type='submit'>Add todo</button>
@@ -39,3 +42,5 @@ function Addtodo() {
     </div>
   );
 }
+
+export default Addtodo;
